@@ -1,4 +1,4 @@
-# SiMPle
+# SIMPle: Assessing music similarity using subsequences joins
 
 Welcome to the Similarity Matrix Profile (SiMPle) repository. SiMPle is a tool for assessing music similarity. It is done by (AB- or Self-) join operations. For further information, please check the following papers.
 

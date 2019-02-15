@@ -8,7 +8,7 @@ def oti(seq_a, seq_b):
 
     oti_vec = np.zeros(12)
     for i in range(12):
-        oti_vec[i] = np.dot(profile_a,np.roll(profile_b,i))
+        oti_vec[i] = np.dot(profile_a,np.roll(profile_b,i,axis=0))
 
     sorted_index = np.argsort(oti_vec)
     
@@ -28,8 +28,7 @@ def mean_average_precision(dist_matrix, train_labels, test_labels):
         
         y_scores = -dist_matrix[i,:] # descending order: the higher the distance, the lower the "score"
         
-        ave_sum += average_precision_score(y_true, y_scores)
-        
+        ave_sum += average_precision_score(y_true, y_scores)        
     
     return ave_sum / n
 
@@ -45,3 +44,4 @@ def mr1(dist_matrix, train_labels, test_labels):
         sum_rank += rank[0][0]
     
     return sum_rank / n
+

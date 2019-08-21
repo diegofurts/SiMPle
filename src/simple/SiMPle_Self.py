@@ -12,6 +12,7 @@ References:
 
 import numpy as np
 import random
+import scipy
 _EPS = 1e-14
 
 def simpleself(seq, subseq_len):
@@ -39,7 +40,7 @@ def simpleself(seq, subseq_len):
         dist_profile = seq_cum_sum2 + subseq_cum_sum2
                 
         for i_dim in range(0,ndim):
-            prods = np.convolve(this_subseq[i_dim,:],seq[i_dim,:])
+            prods = scipy.signal.fftconvolve(this_subseq[i_dim,:],seq[i_dim,:])
             dist_profile -= (2 * prods[subseq_len-1:seq_len])
         
         dist_profile[max(0,i_subseq-exclusion_zone+1):min(matrix_profile_len,i_subseq+exclusion_zone)] = np.inf

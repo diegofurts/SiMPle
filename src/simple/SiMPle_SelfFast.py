@@ -12,6 +12,8 @@ References:
 
 import numpy as np
 import random
+import scipy
+
 _EPS = 1e-14
 
 def simpleself(seq, subseq_len):
@@ -32,7 +34,7 @@ def simpleself(seq, subseq_len):
     
     prods = np.full([ndim,seq_len+subseq_len-1], np.inf)
     for i_dim in range(0,ndim):
-        prods[i_dim,:] = np.convolve(first_subseq[i_dim,:],seq[i_dim,:])
+        prods[i_dim,:] = scipy.signal.fftconvolve(first_subseq[i_dim,:],seq[i_dim,:])
         dist_profile -= (2 * prods[i_dim,subseq_len-1:seq_len])
     prods = prods[:, subseq_len-1:seq_len] # only the interesting products
     prods_inv = np.copy(prods)

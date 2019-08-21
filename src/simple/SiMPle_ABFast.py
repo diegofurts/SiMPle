@@ -27,7 +27,7 @@ def simpleab(seq_a, seq_b, subseq_len):
     prods_inv = np.full([ndim,seq_a.shape[1]+subseq_len-1], np.inf)
     first_subseq = np.flip(seq_b[:,0:subseq_len],1)  
     for i_dim in range(0,ndim):
-        prods_inv[i_dim,:] = np.convolve(first_subseq[i_dim,:],seq_a[i_dim,:])
+        prods_inv[i_dim,:] = scipy.signal.fftconvolve(first_subseq[i_dim,:],seq_a[i_dim,:])
     prods_inv = prods_inv[:, subseq_len-1:seq_a.shape[1]]
        
     # windowed cumulative sum of the sequence b

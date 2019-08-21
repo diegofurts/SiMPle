@@ -12,6 +12,7 @@ References:
 
 import numpy as np
 import random
+import scipy
 _EPS = 1e-14
 
 def simpleab(seq_a, seq_b, subseq_len):
@@ -39,7 +40,7 @@ def simpleab(seq_a, seq_b, subseq_len):
                 
         dist_profile = seq_b_cum_sum2 + subseq_cum_sum2
         for i_dim in range(0,ndim):
-            prods = np.convolve(this_subseq[i_dim,:],seq_b[i_dim,:])
+            prods = scipy.signal.fftconvolve(this_subseq[i_dim,:],seq_b[i_dim,:])
             dist_profile -= (2 * prods[subseq_len-1:seq_b_len])
         
         matrix_profile[i_subseq] = np.min(dist_profile)
